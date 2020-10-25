@@ -31,6 +31,4 @@ build/
 ### VS Code ###
 .vscode/
 
-application.yml
-generatorConfig.xml
 .mvn

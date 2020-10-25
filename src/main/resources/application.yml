@@ -1,0 +1,28 @@
+server:
+  port: 8300
+
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://*.*.*.*:3306/lab_website
+    username: root
+    password: *
+
+aliyun:
+  oss:
+    endpoint: oss-cn-beijing.aliyuncs.com
+    accessKeyId: *
+    accessKeySecret: *
+    bucketName: lab-oss
+    policy:
+      expire: 300
+    maxSize: 10
+    callback: http://*.*.*.*:8300/aliyun/oss/callback
+    dir:
+      prefix: lab/images/
+
+jwt:
+  secret: 123123123
+  expiration: 1000
+
+
