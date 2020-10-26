@@ -5,12 +5,14 @@ import com.github.pagehelper.PageInfo;
 import ink.verge.lab.mbg.model.Member;
 import ink.verge.lab.response.CommonResult;
 import ink.verge.lab.service.MemberService;
+import ink.verge.lab.utils.OssUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,12 +29,10 @@ import java.util.Map;
 @Slf4j
 @Api("MemberController")
 public class MemberController {
-    MemberService memberService;
-
     @Autowired
-    public void setMemberService(MemberService memberService) {
-        this.memberService = memberService;
-    }
+    private MemberService memberService;
+    @Autowired
+    private OssUtils ossUtils;
 
     @ApiOperation("添加成员")
     @PostMapping("/insert")
@@ -44,6 +44,11 @@ public class MemberController {
         }
     }
 
+    @ApiOperation("上传成员照片")
+    @PostMapping("/insert/photo")
+    public CommonResult insertMemberPhoto(@RequestParam MultipartFile img){
+        return ossUtils.uploadImg(img);
+    }
     @ApiOperation("删除成员")
     @DeleteMapping("/{id}")
     public CommonResult deleteMember(@PathVariable int id){

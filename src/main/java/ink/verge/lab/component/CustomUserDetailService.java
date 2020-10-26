@@ -34,8 +34,6 @@ public class CustomUserDetailService implements UserDetailsService {
     private RoleMapper roleMapper;
     @Autowired
     private AuthMapper authMapper;
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) {
