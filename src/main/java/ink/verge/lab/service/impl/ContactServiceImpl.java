@@ -47,4 +47,12 @@ public class ContactServiceImpl implements ContactService {
     public Contact getContactById(int id) {
         return contactMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public List<Contact> getContactByKeyword(String keyword) {
+        ContactExample example = new ContactExample();
+        example.createCriteria().andAddressLike(keyword);
+        example.or().andEmailLike(keyword);
+        return contactMapper.selectByExample(example);
+    }
 }

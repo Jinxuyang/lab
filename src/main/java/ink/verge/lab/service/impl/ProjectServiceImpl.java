@@ -52,14 +52,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<Project> getProjectByKeyWord(String keyword) {
-        return null;
-    }
-
-    /*@Override
-    public List<Project> getProjectByKeyWord(String keyword) {
         ProjectExample projectExample = new ProjectExample();
-        projectExample.createCriteria().andNameLike(keyword);
-        projectExample.or().andManagerLike(keyword);
-        return null;
-    }*/
+        projectExample.createCriteria().andManagerLike(keyword);
+        projectExample.or().andNameLike(keyword);
+        return projectMapper.selectByExample(projectExample);
+    }
 }

@@ -1,6 +1,7 @@
 package ink.verge.lab.service;
 
 import ink.verge.lab.mbg.model.Contact;
+import ink.verge.lab.mbg.model.Direction;
 
 import java.util.List;
 
@@ -15,4 +16,5 @@ public interface ContactService {
     int updateContact(Contact contact);
     List<Contact> getAllContact();
     Contact getContactById(int id);
+    List<Contact> getContactByKeyword(String keyword);
 }

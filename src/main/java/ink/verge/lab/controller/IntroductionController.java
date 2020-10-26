@@ -2,14 +2,13 @@ package ink.verge.lab.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import ink.verge.lab.mbg.model.Direction;
+import ink.verge.lab.mbg.model.Introduction;
 import ink.verge.lab.response.CommonResult;
-import ink.verge.lab.service.DirectionService;
+import ink.verge.lab.service.IntroductionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -18,26 +17,25 @@ import java.util.Map;
 
 /**
  * @Author Verge
- * @Date 2020/10/11 20:05
+ * @Date 2020/10/26 13:56
  * @Version 1.0
  */
-@Component
+@Api("简介管理")
 @RestController
-@RequestMapping("/direction")
+@RequestMapping("/introduction")
 @Slf4j
-@Api("DirectionController")
-public class DirectionController {
-    DirectionService directionService;
+public class IntroductionController {
+    IntroductionService introductionService;
 
     @Autowired
-    public void setDirectionService(DirectionService directionService) {
-        this.directionService = directionService;
+    public void setIntroductionService(IntroductionService introductionService) {
+        this.introductionService = introductionService;
     }
 
     @ApiOperation("添加成员")
     @PostMapping("/insert")
-    public CommonResult insertDirection(@RequestBody Direction direction){
-        if (directionService.insertDirection(direction) == 1){
+    public CommonResult insertIntroduction(@RequestBody Introduction introduction){
+        if (introductionService.insertIntroduction(introduction) == 1){
             return CommonResult.success();
         } else {
             return CommonResult.failed();
@@ -46,8 +44,8 @@ public class DirectionController {
 
     @ApiOperation("删除成员")
     @DeleteMapping("{id}")
-    public CommonResult deleteDirection(@PathVariable int id){
-        if (directionService.deleteDirection(id) == 1){
+    public CommonResult deleteIntroduction(@PathVariable int id){
+        if (introductionService.deleteIntroduction(id) == 1){
             return CommonResult.success();
         } else {
             return CommonResult.failed();
@@ -56,9 +54,9 @@ public class DirectionController {
 
     @ApiOperation("修改成员信息")
     @PutMapping("{id}")
-    public CommonResult updateDirection(@PathVariable int id,@RequestBody Direction direction){
-        direction.setId(id);
-        if (directionService.updateDirection(direction) == 1){
+    public CommonResult updateIntroduction(@PathVariable int id,@RequestBody Introduction introduction){
+        introduction.setId(id);
+        if (introductionService.updateIntroduction(introduction) == 1){
             return CommonResult.success();
         } else {
             return CommonResult.failed();
@@ -66,24 +64,24 @@ public class DirectionController {
     }
     @ApiOperation("通过ID获取成员")
     @GetMapping("{id}")
-    public CommonResult getDirection(@PathVariable int id){
+    public CommonResult getIntroduction(@PathVariable int id){
         if (id <= 0){
             return CommonResult.failed("参数不正确");
         }
 
-        Direction direction = directionService.getDirectionById(id);
-        if (direction != null){
-            return CommonResult.success(direction);
+        Introduction introduction = introductionService.getIntroductionById(id);
+        if (introduction != null){
+            return CommonResult.success(introduction);
         } else {
             return CommonResult.failed();
         }
     }
     @ApiOperation("获取所有项目")
     @GetMapping("/get/all")
-    public CommonResult getAllDirection(@RequestParam(value = "pageNum") int pageNum,
-                                      @RequestParam(value = "pageSize",defaultValue = "8") int pageSize){
+    public CommonResult getAllIntroduction(@RequestParam(value = "pageNum") int pageNum,
+                                       @RequestParam(value = "pageSize",defaultValue = "8") int pageSize){
         PageHelper.startPage(pageNum,pageSize);
-        List<Direction> list = directionService.getAllDirection();
+        List<Introduction> list = introductionService.getAllIntroduction();
         int pageCnt = PageInfo.of(list).getPages();
         Map<String,Object> resultMap = new HashMap<>();
         resultMap.put("list",list);
@@ -93,11 +91,11 @@ public class DirectionController {
 
     @ApiOperation("根据关键词查找项目")
     @GetMapping("/get/keyword")
-    public CommonResult getDirectionByKeyWord(@RequestParam String keyword,
-                                            @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
-                                            @RequestParam(value = "pageSize",defaultValue = "8") int pageSize){
+    public CommonResult getIntroductionByKeyWord(@RequestParam String keyword,
+                                             @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                             @RequestParam(value = "pageSize",defaultValue = "8") int pageSize){
         PageHelper.startPage(pageNum,pageSize);
-        List<Direction> list = directionService.getDirectionByKeyword(keyword);
+        List<Introduction> list = introductionService.getIntroductionByKeyword(keyword);
         int pageCnt = PageInfo.of(list).getPages();
         Map<String,Object> resultMap = new HashMap<>();
         resultMap.put("list",list);

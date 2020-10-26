@@ -1,5 +1,7 @@
 package ink.verge.lab.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import ink.verge.lab.mbg.model.Project;
 import ink.verge.lab.response.CommonResult;
 import ink.verge.lab.service.ProjectService;
@@ -10,14 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author Verge
  * @Date 2020/10/11 20:03
  * @Version 1.0
  */
-@Component
 @RestController
 @RequestMapping("/project")
 @Slf4j
@@ -74,10 +77,30 @@ public class ProjectController {
             return CommonResult.failed();
         }
     }
-    @ApiOperation("获取所有成员")
+    @ApiOperation("获取所有项目")
     @GetMapping("/get/all")
-    public CommonResult getAllProject(){
+    public CommonResult getAllProject(@RequestParam(value = "pageNum") int pageNum,
+                                      @RequestParam(value = "pageSize",defaultValue = "8") int pageSize){
+        PageHelper.startPage(pageNum,pageSize);
         List<Project> list = projectService.getAllProject();
-        return CommonResult.success(list);
+        int pageCnt = PageInfo.of(list).getPages();
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("list",list);
+        resultMap.put("pageCnt",pageCnt);
+        return CommonResult.success(resultMap);
+    }
+
+    @ApiOperation("根据关键词查找项目")
+    @GetMapping("/get/keyword")
+    public CommonResult getProjectByKeyWord(@RequestParam String keyword,
+                                           @RequestParam(value = "pageNum",defaultValue = "1") int pageNum,
+                                           @RequestParam(value = "pageSize",defaultValue = "8") int pageSize){
+        PageHelper.startPage(pageNum,pageSize);
+        List<Project> list = projectService.getProjectByKeyWord(keyword);
+        int pageCnt = PageInfo.of(list).getPages();
+        Map<String,Object> resultMap = new HashMap<>();
+        resultMap.put("list",list);
+        resultMap.put("pageCnt",pageCnt);
+        return CommonResult.success(resultMap);
     }
 }

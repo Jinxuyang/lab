@@ -47,4 +47,13 @@ public class DirectionServiceImpl implements DirectionService {
     public Direction getDirectionById(int id) {
         return directionMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public List<Direction> getDirectionByKeyword(String keyword) {
+        DirectionExample example = new DirectionExample();
+        example.createCriteria().andIntroductionLike(keyword);
+        example.or().andNameLike(keyword);
+        return directionMapper.selectByExample(example);
+    }
+
 }

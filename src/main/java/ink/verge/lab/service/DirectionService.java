@@ -15,4 +15,5 @@ public interface DirectionService {
     int updateDirection(Direction direction);
     List<Direction> getAllDirection();
     Direction getDirectionById(int id);
+    List<Direction> getDirectionByKeyword(String keyword);
 }

@@ -47,4 +47,11 @@ public class HomeNewsServiceImpl implements HomeNewsService {
     public HomeNews getHomeNewsById(int id) {
         return homeNewsMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public List<HomeNews> getHomeNewsByKeyword(String keyword) {
+        HomeNewsExample example = new HomeNewsExample();
+        example.createCriteria().andNameLike(keyword);
+        return homeNewsMapper.selectByExample(example);
+    }
 }

@@ -32,3 +32,5 @@ build/
 .vscode/
 
 .mvn
+application.yml
+generatorConfig.xml

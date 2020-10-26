@@ -1,5 +1,6 @@
 package ink.verge.lab.service;
 
+import ink.verge.lab.mbg.model.Direction;
 import ink.verge.lab.mbg.model.HomeNews;
 
 import java.util.List;
@@ -15,4 +16,5 @@ public interface HomeNewsService {
     int updateHomeNews(HomeNews homeNews);
     List<HomeNews> getAllHomeNews();
     HomeNews getHomeNewsById(int id);
+    List<HomeNews> getHomeNewsByKeyword(String keyword);
 }
