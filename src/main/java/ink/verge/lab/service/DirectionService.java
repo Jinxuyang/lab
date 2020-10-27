@@ -1,5 +1,6 @@
 package ink.verge.lab.service;
 
+import ink.verge.lab.controller.viewobject.DirectionVO;
 import ink.verge.lab.mbg.model.Direction;
 
 import java.util.List;
@@ -14,6 +15,12 @@ public interface DirectionService {
     int deleteDirection(int id);
     int updateDirection(Direction direction);
     List<Direction> getAllDirection();
+    List<DirectionVO> getAllDirectionVO();
     Direction getDirectionById(int id);
     List<Direction> getDirectionByKeyword(String keyword);
+    boolean insertDirectionWithPhotos(DirectionVO directionVO);
+    DirectionVO getDirectionVOByID(int id);
+    List<DirectionVO> getDirectionVOByKeyword(String keyword);
+    List<String> getPhotoByDirId(int id);
+    int deletePhotoByUrl(String url);
 }

@@ -3,7 +3,10 @@ package ink.verge.lab.mbg.mapper;
 import ink.verge.lab.mbg.model.Direction;
 import ink.verge.lab.mbg.model.DirectionExample;
 import java.util.List;
+import java.util.Set;
+
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -29,4 +32,12 @@ public interface DirectionMapper {
     int updateByPrimaryKeySelective(Direction record);
 
     int updateByPrimaryKey(Direction record);
+
+    int insertPhotoById(@Param("id") int id,@Param("url") String url);
+
+    List<String> selectPhotoById(@Param("id") Integer id);
+
+    int deletePhotoById(Integer id);
+
+    int deletePhotoByUrl(String url);
 }

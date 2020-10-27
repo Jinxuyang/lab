@@ -5,16 +5,16 @@ import com.github.pagehelper.PageInfo;
 import ink.verge.lab.mbg.model.Project;
 import ink.verge.lab.response.CommonResult;
 import ink.verge.lab.service.ProjectService;
+import ink.verge.lab.utils.OssUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author Verge
@@ -26,13 +26,10 @@ import java.util.Map;
 @Slf4j
 @Api("ProjectController")
 public class ProjectController {
-    ProjectService projectService;
-
     @Autowired
-    public void setProjectService(ProjectService projectService) {
-        this.projectService = projectService;
-    }
-
+    ProjectService projectService;
+    @Autowired
+    OssUtils ossUtils;
     @ApiOperation("添加成员")
     @PostMapping("/insert")
     public CommonResult insertProject(@RequestBody Project project){

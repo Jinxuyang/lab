@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @Author Verge
@@ -54,5 +56,20 @@ public class OssUtils {
         }
 
         return CommonResult.success("上传成功","https://"+bucketName+"."+endpoint+"/"+objectName);
+    }
+
+    public CommonResult uploadImgs(MultipartFile[] img){
+        boolean flag = true;
+        Set<String> urlSet = new HashSet<>();
+        for (MultipartFile multipartFile : img) {
+            CommonResult result = uploadImg(multipartFile);
+            if (result.getCode() == 200){
+                urlSet.add((String) result.getData());
+            } else {
+                flag = false;
+            }
+        }
+        if (flag) return CommonResult.success(urlSet);
+        else return CommonResult.failed();
     }
 }

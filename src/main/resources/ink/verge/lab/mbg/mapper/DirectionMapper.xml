@@ -208,4 +208,19 @@
       is_show = #{isShow,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <insert id="insertPhotoById" parameterType="map">
+    insert into direction_photo (direction_id, photo)
+    VALUES (#{id},#{url})
+  </insert>
+  <select id="selectPhotoById" parameterType="java.lang.Integer" resultType="java.lang.String">
+    select photo
+    from direction_photo
+    where direction_id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deletePhotoById" parameterType="java.lang.Integer" >
+    delete from direction_photo where direction_id = #{id}
+  </delete>
+  <delete id="deletePhotoByUrl" parameterType="java.lang.String">
+    delete from direction_photo where photo like #{url}
+  </delete>
 </mapper>
