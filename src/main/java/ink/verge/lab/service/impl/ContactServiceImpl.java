@@ -3,6 +3,7 @@ package ink.verge.lab.service.impl;
 import ink.verge.lab.mbg.mapper.ContactMapper;
 import ink.verge.lab.mbg.model.Contact;
 import ink.verge.lab.mbg.model.ContactExample;
+import ink.verge.lab.mbg.model.Introduction;
 import ink.verge.lab.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,5 +55,17 @@ public class ContactServiceImpl implements ContactService {
         example.createCriteria().andAddressLike(keyword);
         example.or().andEmailLike(keyword);
         return contactMapper.selectByExample(example);
+    }
+
+    @Override
+    public Contact getContactShowOnIndex() throws Exception {
+        ContactExample example = new ContactExample();
+        example.createCriteria().andIsShowOnHomeEqualTo(true);
+        List<Contact> list  = contactMapper.selectByExample(example);
+        if (list.size() == 1){
+            return list.get(0);
+        } else {
+            throw new Exception();
+        }
     }
 }

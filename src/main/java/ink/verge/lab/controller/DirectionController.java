@@ -66,9 +66,9 @@ public class DirectionController {
 
     @ApiOperation("修改成员信息")
     @PutMapping("{id}")
-    public CommonResult updateDirection(@PathVariable int id,@RequestBody Direction direction){
-        direction.setId(id);
-        if (directionService.updateDirection(direction) == 1){
+    public CommonResult updateDirection(@PathVariable int id,@RequestBody DirectionVO directionVO){
+        directionVO.setId(id);
+        if (directionService.updateDirectionVO(directionVO) == 1){
             return CommonResult.success();
         } else {
             return CommonResult.failed();

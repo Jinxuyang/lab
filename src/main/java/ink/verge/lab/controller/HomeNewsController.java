@@ -5,11 +5,13 @@ import com.github.pagehelper.PageInfo;
 import ink.verge.lab.mbg.model.HomeNews;
 import ink.verge.lab.response.CommonResult;
 import ink.verge.lab.service.HomeNewsService;
+import ink.verge.lab.utils.OssUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,12 +27,10 @@ import java.util.Map;
 @RequestMapping("/homenews")
 @Slf4j
 public class HomeNewsController {
-    HomeNewsService homenewsService;
-
     @Autowired
-    public void setHomeNewsService(HomeNewsService homenewsService) {
-        this.homenewsService = homenewsService;
-    }
+    private HomeNewsService homenewsService;
+    @Autowired
+    OssUtils ossUtils;
 
     @ApiOperation("添加成员")
     @PostMapping("/insert")
@@ -50,6 +50,18 @@ public class HomeNewsController {
         } else {
             return CommonResult.failed();
         }
+    }
+
+    @ApiOperation("上传照片")
+    @PostMapping("/image")
+    public CommonResult uploadImage(MultipartFile img){
+        return ossUtils.uploadImg(img);
+    }
+
+    @ApiOperation("上传文件")
+    @PostMapping("/file")
+    public CommonResult uploadFile(MultipartFile file){
+        return ossUtils.uploadFile(file);
     }
 
     @ApiOperation("修改成员信息")

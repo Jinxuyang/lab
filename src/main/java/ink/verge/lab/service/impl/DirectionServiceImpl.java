@@ -100,7 +100,13 @@ public class DirectionServiceImpl implements DirectionService {
     }
 
     @Override
-    public int updateDirection(Direction direction) {
+    public int updateDirectionVO(DirectionVO directionVO) {
+        List<String> urlList = directionVO.getPhotos();
+        for (String url : urlList) {
+            directionMapper.insertPhotoById(directionVO.getId(),url);
+        }
+        Direction direction = new Direction();
+        BeanUtils.copyProperties(directionVO,direction);
         return directionMapper.updateByPrimaryKeySelective(direction);
     }
 

@@ -13,7 +13,7 @@ import java.util.List;
 public interface DirectionService {
     int insertDirection(Direction direction);
     int deleteDirection(int id);
-    int updateDirection(Direction direction);
+    int updateDirectionVO(DirectionVO directionVO);
     List<Direction> getAllDirection();
     List<DirectionVO> getAllDirectionVO();
     Direction getDirectionById(int id);

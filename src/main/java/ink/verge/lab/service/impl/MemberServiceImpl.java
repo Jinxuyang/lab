@@ -51,4 +51,16 @@ public class MemberServiceImpl implements MemberService {
         memberExample.or().andPositionLike(keyword);
         return memberMapper.selectByExample(memberExample);
     }
+
+    @Override
+    public Member getLeader() throws Exception{
+        MemberExample example = new MemberExample();
+        example.createCriteria().andIsLeaderEqualTo(true);
+        List list = memberMapper.selectByExample(example);
+        if (list.size() == 1){
+            return (Member) list.get(0);
+        } else {
+            throw new Exception("实验室带头人不唯一,请检查");
+        }
+    }
 }

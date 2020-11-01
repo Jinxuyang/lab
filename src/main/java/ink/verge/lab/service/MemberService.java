@@ -44,4 +44,6 @@ public interface MemberService {
      * @return
      */
     List<Member> getMemberByKeyWord(String keyword);
+
+    Member getLeader() throws Exception;
 }

@@ -16,4 +16,5 @@ public interface IntroductionService {
     List<Introduction> getAllIntroduction();
     Introduction getIntroductionById(int id);
     List<Introduction> getIntroductionByKeyword(String keyword);
+    Introduction getIntroductionShowOnIndex() throws Exception;
 }

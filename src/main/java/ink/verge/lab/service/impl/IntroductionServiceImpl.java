@@ -54,4 +54,16 @@ public class IntroductionServiceImpl implements IntroductionService {
         example.createCriteria().andContentLike(keyword);
         return introductionMapper.selectByExample(example);
     }
+
+    @Override
+    public Introduction getIntroductionShowOnIndex() throws Exception{
+        IntroductionExample example = new IntroductionExample();
+        example.createCriteria().andIsShowOnHomeEqualTo(true);
+        List<Introduction> list = introductionMapper.selectByExample(example);
+        if (list.size() == 1){
+            return list.get(0);
+        } else {
+            throw new Exception();
+        }
+    }
 }
