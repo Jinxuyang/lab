@@ -6,23 +6,23 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://47.93.200.138:3306/lab_website
     username: root
-    password: d5aDEHk2rORSQCxl
+    password: 
   servlet:
     multipart:
       enabled: true
 
 aliyun:
   oss:
-    endpoint: oss-cn-beijing.aliyuncs.com
-    accessKeyId: LTAI4GJnJwav5ofCfZWBawzX
-    accessKeySecret: hVR6lbkwF9YvRmU8QxVuiCQiJMSz9h
-    bucketName: lab-oss
+    endpoint: 
+    accessKeyId: 
+    accessKeySecret: 
+    bucketName: 
     policy:
       expire: 300
     maxSize: 10
-    callback: http://47.93.200.138:8300/aliyun/oss/callback
+    callback: 
     dir:
-      prefix: lab/images/
+      prefix: 
 
 jwt:
   secret: 123123123
