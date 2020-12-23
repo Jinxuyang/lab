@@ -1,9 +1,10 @@
 package ink.verge.lab.controller;
 
+import com.fehead.lang.controller.BaseController;
+import com.fehead.lang.validation.Update;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import ink.verge.lab.controller.viewobject.DirectionVO;
-import ink.verge.lab.mbg.model.Direction;
 import ink.verge.lab.response.CommonResult;
 import ink.verge.lab.service.DirectionService;
 import ink.verge.lab.utils.OssUtils;
@@ -12,10 +13,17 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Null;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author Verge
@@ -28,7 +36,7 @@ import java.util.*;
 @Slf4j
 @Api("DirectionController")
 
-public class DirectionController {
+public class DirectionController extends BaseController {
     @Autowired
     private OssUtils ossUtils;
     @Autowired
@@ -37,6 +45,7 @@ public class DirectionController {
     @ApiOperation("添加成员")
     @PostMapping("/insert")
     public CommonResult insertDirection(@RequestBody DirectionVO direction){
+        //throw new MethodArgumentNotValidException();
         if (directionService.insertDirectionWithPhotos(direction)) return CommonResult.success();
         else return CommonResult.failed();
     }
@@ -49,7 +58,7 @@ public class DirectionController {
 
     @ApiOperation("删除成员")
     @DeleteMapping("{id}")
-    public CommonResult deleteDirection(@PathVariable int id){
+    public CommonResult deleteDirection(@PathVariable @Null int id){
         if (directionService.deleteDirection(id) == 1){
             return CommonResult.success();
         } else {

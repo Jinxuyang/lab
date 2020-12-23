@@ -1,10 +1,15 @@
 package ink.verge.lab.mbg.model;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Null;
 import java.io.Serializable;
 
+
 public class Direction implements Serializable {
+    @Null
     private Integer id;
 
+    @Email
     private String name;
 
     private String introduction;

@@ -90,6 +90,7 @@ public class MemberController {
     @GetMapping("/get/all")
     public CommonResult getAllMember( @RequestParam(value = "pageNum") int pageNum,
                                       @RequestParam(value = "pageSize",defaultValue = "8") int pageSize){
+        log.info("来了老弟");
         PageHelper.startPage(pageNum,pageSize);
         List<Member> list = memberService.getAllMember();
         int pageCnt = PageInfo.of(list).getPages();
