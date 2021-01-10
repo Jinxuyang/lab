@@ -27,7 +27,7 @@ public class TestController {
     public void test(){
         PathMatcher matcher = new AntPathMatcher();
         Assert.assertTrue(matcher.match("/user", "/user"));
-        Assert.assertTrue(matcher.match("/**/user", "/dfgdg/gdfgdf/dfgdsadas/user"));
+        Assert.assertTrue(matcher.match("/**/user", "/dfgdg/gdfgdf/dfgdsad/user"));
         Assert.assertTrue(matcher.match("/*/user", "/asdas/user"));
         Assert.assertFalse(matcher.match("/*/user", "/asdas/sadas/user"));
         Assert.assertTrue(matcher.match("/*/user/**", "/asdas/user"));
